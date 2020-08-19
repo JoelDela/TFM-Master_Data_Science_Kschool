@@ -59,7 +59,7 @@ elif choice == "Time Series":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -91,7 +91,9 @@ elif choice == "Time Series":
             text=alt.Text('text:N')
         )
 
-        st.write(fp_predictions+metric1)
+        st.write((fp_predictions+metric1).properties(
+            title='Facebook Prophet model predictions'
+        ))
 
         st.markdown(f"""
         For the Facebook Prophet model we have achieved a total RMSE of: 
@@ -144,7 +146,9 @@ elif choice == "Time Series":
             text=alt.Text('text:N')
         )
 
-        st.write(sarimax_predictions+metric6)
+        st.write((sarimax_predictions+metric6).properties(
+            title='SARIMAX model predictions'
+        ))
 
         st.markdown(f"""
         For the SARIMAX model we have achieved a total RMSE of: 
@@ -225,7 +229,7 @@ elif choice == "Neural Network":
         )
 
         st.write((zoom_nn_reg_predictions+metric2 & nn_reg_predictions).properties(
-            title='Predicción mediante el uso de una red neuronal multicapa'
+            title='Network multilayer model predictions'
         ))
         
         st.markdown(f"""
@@ -295,11 +299,11 @@ elif choice == "Neural Network":
         )
 
         st.write((zoom_lstm_1_predictions+metric3 & lstm_1_predictions).properties(
-            title='Predicción mediante el uso de una red neuronal LSTM de una sola capa'
+            title='LSTM Neural Network model with 1 layer predictions'
         ))
 
         st.markdown(f"""
-        For the LSTM Neural Network with 1 layer model we have achieved a total RMSE of: 
+        For the LSTM Neural Network model with 1 layer we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[2][dataframes[2]['type']=='y_test']['value'],
         dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)} and a R2 of:
         {round(R2_metric(dataframes[2][dataframes[2]['type']=='y_test']['value'],
@@ -366,7 +370,7 @@ elif choice == "Neural Network":
         )
 
         st.write((zoom_nn_reg_ts_predictions+metric4 & nn_reg_ts_predictions).properties(
-            title='Predicción mediante el uso de una red neuronal multicapa en forma de serie temporal'
+            title='Neural Network Multilayer model with sorted data predictions'
         ))
         
         st.markdown(f"""
@@ -436,7 +440,7 @@ elif choice == "Neural Network":
         )
 
         st.write((zoom_lstm_mlt_predictions+metric5 & lstm_mlt_predictions).properties(
-            title='Predicción mediante el uso de una red neuronal multicapa en forma de serie temporal'
+            title='LSTM Neural Network model with more than 1 layer predictions'
         ))
         
         st.markdown(f"""
@@ -517,7 +521,7 @@ elif choice == 'Gradient Boosting':
         )
 
         st.write((zoom_xgb_predictions+metric7 & xgb_predictions).properties(
-            title='Predicción mediante el uso de un modelo de gradient boosting'
+            title='XGBoost model with shuffled data  predictions'
         ))
     
         st.markdown(f"""
@@ -588,7 +592,7 @@ elif choice == 'Gradient Boosting':
         )
 
         st.write((zoom_xgb_ts_predictions+metric8 & xgb_ts_predictions).properties(
-            title='Predicción mediante el uso de un modelo de gradient boosting siguiendo una serie temporal'
+            title='XGBoost model with sorted data  predictions'
         ))
         
         st.markdown(f"""
