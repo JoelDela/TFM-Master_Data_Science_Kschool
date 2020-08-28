@@ -7,6 +7,11 @@ import numpy as np
 import os 
 alt.data_transformers.disable_max_rows()
 
+# After importing the modules, we are defining our functions:
+def mean_absolute_percentage_error(y_true, y_pred): 
+    y_true, y_pred = np.array(y_true), np.array(y_pred)
+    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+
 dataframes = [] 
 for i in os.listdir('./'): 
     if i.endswith('.csv'): 
@@ -98,9 +103,11 @@ elif choice == "Time Series":
         st.markdown(f"""
         For the Facebook Prophet model we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[0][dataframes[0]['type']=='y_test']['value'],
-        dataframes[0][dataframes[0]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[0][dataframes[0]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[0][dataframes[0]['type']=='y_test']['value'],
-        dataframes[0][dataframes[0]['type']=='y_pred']['value']),2)} 
+        dataframes[0][dataframes[0]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[0][dataframes[0]['type']=='y_test']['value'],
+        dataframes[0][dataframes[0]['type']=='y_pred']['value']),2)}
         """)
     
     check2 = st.checkbox("SARIMAX")
@@ -114,7 +121,7 @@ elif choice == "Time Series":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -153,9 +160,11 @@ elif choice == "Time Series":
         st.markdown(f"""
         For the SARIMAX model we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[5][dataframes[5]['type']=='y_test']['value'],
-        dataframes[5][dataframes[5]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[5][dataframes[5]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[5][dataframes[5]['type']=='y_test']['value'],
-        dataframes[5][dataframes[5]['type']=='y_pred']['value']),2)} 
+        dataframes[5][dataframes[5]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[5][dataframes[5]['type']=='y_test']['value'],
+        dataframes[5][dataframes[5]['type']=='y_pred']['value']),2)}
         """)
     
 elif choice == "Neural Network":    
@@ -181,7 +190,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -195,7 +204,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')]
@@ -235,9 +244,11 @@ elif choice == "Neural Network":
         st.markdown(f"""
         For the Neural Network multilayer model with shuffled data we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[1][dataframes[1]['type']=='y_test']['value'],
-        dataframes[1][dataframes[1]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[1][dataframes[1]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[1][dataframes[1]['type']=='y_test']['value'],
-        dataframes[1][dataframes[1]['type']=='y_pred']['value']),2)} 
+        dataframes[1][dataframes[1]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[1][dataframes[1]['type']=='y_test']['value'],
+        dataframes[1][dataframes[1]['type']=='y_pred']['value']),2)}
         """)
 
     check4 = st.checkbox("Neural Network LSTM 1 layer")
@@ -251,7 +262,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -265,7 +276,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -305,9 +316,11 @@ elif choice == "Neural Network":
         st.markdown(f"""
         For the LSTM Neural Network model with 1 layer we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[2][dataframes[2]['type']=='y_test']['value'],
-        dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[2][dataframes[2]['type']=='y_test']['value'],
-        dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)} 
+        dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[2][dataframes[2]['type']=='y_test']['value'],
+        dataframes[2][dataframes[2]['type']=='y_pred']['value']),2)}
         """)
         
     check5 = st.checkbox("Neural Network multilayer sorted data")
@@ -322,7 +335,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -336,7 +349,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -376,9 +389,11 @@ elif choice == "Neural Network":
         st.markdown(f"""
         For the Neural Network Multilayer model with sorted data we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[3][dataframes[3]['type']=='y_test']['value'],
-        dataframes[3][dataframes[3]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[3][dataframes[3]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[3][dataframes[3]['type']=='y_test']['value'],
-        dataframes[3][dataframes[3]['type']=='y_pred']['value']),2)} 
+        dataframes[3][dataframes[3]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[3][dataframes[3]['type']=='y_test']['value'],
+        dataframes[3][dataframes[3]['type']=='y_pred']['value']),2)}
         """)
 
     check6 = st.checkbox("Neural Network LSTM multilayer")
@@ -392,7 +407,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -406,7 +421,7 @@ elif choice == "Neural Network":
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -446,9 +461,11 @@ elif choice == "Neural Network":
         st.markdown(f"""
         For the LSTM Neural Network model with more than 1 layer we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[4][dataframes[4]['type']=='y_test']['value'],
-        dataframes[4][dataframes[4]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[4][dataframes[4]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[4][dataframes[4]['type']=='y_test']['value'],
-        dataframes[4][dataframes[4]['type']=='y_pred']['value']),2)} 
+        dataframes[4][dataframes[4]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[4][dataframes[4]['type']=='y_test']['value'],
+        dataframes[4][dataframes[4]['type']=='y_pred']['value']),2)}
         """)
 
 elif choice == 'Gradient Boosting':
@@ -473,7 +490,7 @@ elif choice == 'Gradient Boosting':
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -487,7 +504,7 @@ elif choice == 'Gradient Boosting':
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -527,9 +544,11 @@ elif choice == 'Gradient Boosting':
         st.markdown(f"""
         For the XGBoost model with shuffled data we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[6][dataframes[6]['type']=='y_test']['value'],
-        dataframes[6][dataframes[6]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[6][dataframes[6]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[6][dataframes[6]['type']=='y_test']['value'],
-        dataframes[6][dataframes[0]['type']=='y_pred']['value']),2)} 
+        dataframes[6][dataframes[0]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[6][dataframes[6]['type']=='y_test']['value'],
+        dataframes[6][dataframes[6]['type']=='y_pred']['value']),2)}
         """)
 
     check8 = st.checkbox("XGBoost sorted data")
@@ -544,7 +563,7 @@ elif choice == 'Gradient Boosting':
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -558,7 +577,7 @@ elif choice == 'Gradient Boosting':
             x=alt.X('date:T',
                sort=alt.Sort(field="date",
                                   order="descending")),
-            y='value',
+            y=alt.Y('value', title = 'price €/MWh'),
             color='type',
             tooltip = [alt.Tooltip('date:T'),
                        alt.Tooltip('value:Q')],
@@ -598,7 +617,9 @@ elif choice == 'Gradient Boosting':
         st.markdown(f"""
         For the XGBoost model with sorted data we have achieved a total RMSE of: 
         {round(RMSE_metric(dataframes[7][dataframes[7]['type']=='y_test']['value'],
-        dataframes[7][dataframes[7]['type']=='y_pred']['value']),2)} and a R2 of:
+        dataframes[7][dataframes[7]['type']=='y_pred']['value']),2)}, a R2 of:
         {round(R2_metric(dataframes[7][dataframes[7]['type']=='y_test']['value'],
-        dataframes[7][dataframes[7]['type']=='y_pred']['value']),2)} 
+        dataframes[7][dataframes[7]['type']=='y_pred']['value']),2)} and a MAPE of:
+        {round(mean_absolute_percentage_error(dataframes[7][dataframes[7]['type']=='y_test']['value'],
+        dataframes[7][dataframes[7]['type']=='y_pred']['value']),2)}
         """)
