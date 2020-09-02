@@ -2,7 +2,7 @@
 
 Predicting the electricity price may look like an easy task, just as the forecasting of assets. But, in fact, there are a few ways of achieving this goal. The purpose of this project is to check and measure this differents paths to get the prediction of the electricity price. 
 
-In this frontpage we are seeing the main structure of the project, how it is divided and how to go through it. If you are looking for a deeper study of the techniques and methods used, you can check the [document](./Comparison_of_ML_models.docx) where everything has been detailed.  
+In this frontpage we are seeing the main structure of the project, how it is divided and how to go through it. If you are looking for a deeper study of the techniques and methods used, you can check the [document attached](./Comparison_of_ML_models.docx) in this repository where everything has been detailed.
 
 ## Structure of the project and how to run it.
 ### Index
