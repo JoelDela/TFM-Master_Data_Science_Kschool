@@ -1,2 +1,7 @@
-# TFM-Master_Data_Science_Kschool
-In this repository I will upload the Final Project of the Master in Data Science from Kschool
+# Comparison of models for predicting electricity price. 
+
+This project is based on what has been learnt during the course. 
+
+## Structure of the project and how to run it.
+### Index
+1. [INstalling modules](./Exploring_data/)
