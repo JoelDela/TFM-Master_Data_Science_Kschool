@@ -20,4 +20,4 @@ In this frontpage we are explaining the main structure of the project, how it is
 
 ### 0. Preparing the environment.
 
-First of all, we have to create the appropiate environment. It would be a good idea to prepare it following the [instructions](https://docs.google.com/document/d/1cwYA04H2VXTalkR78nYHDvJmm1QzhEZjSC_4WvjB1Vw/edit) that were given to us at the beginning of the master. >jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10. With 
+First of all, we have to create the appropiate environment. It would be a good idea to prepare it following the [instructions](https://docs.google.com/document/d/1cwYA04H2VXTalkR78nYHDvJmm1QzhEZjSC_4WvjB1Vw/edit) that were given to us at the beginning of the master. > jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10. With 
