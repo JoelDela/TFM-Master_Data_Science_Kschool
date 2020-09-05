@@ -41,12 +41,12 @@ def return_metrics(df):
     """
     return f"""
     For the Facebook Prophet model we have achieved a total RMSE of: 
-    {round(RMSE_metric(df[df['type']=='y_test']['value'],
-    df[df['type']=='y_pred']['value']),2)}, a R2 of:
-    {round(R2_metric(df[df['type']=='y_test']['value'],
-    df[df['type']=='y_pred']['value']),2)} and a MAPE of:
-    {round(mean_absolute_percentage_error(df[df['type']=='y_test']['value'],
-    df[df['type']=='y_pred']['value']),2)}
+    {round(RMSE_metric(df[df['type']=='test']['value'],
+    df[df['type']=='prediccion']['value']),2)}, a R2 of:
+    {round(R2_metric(df[df['type']=='test']['value'],
+    df[df['type']=='prediccion']['value']),2)} and a MAPE of:
+    {round(mean_absolute_percentage_error(df[df['type']=='test']['value'],
+    df[df['type']=='prediccion']['value']),2)}
     """
 
 def plot_model(df, plot_title):
@@ -91,7 +91,7 @@ def plot_model(df, plot_title):
     ).transform_filter(
         sel.ref()
     ).transform_calculate(
-        diff='(datum.y_test - datum.y_pred)*(datum.y_test - datum.y_pred)'  
+        diff='(datum.test - datum.prediccion)*(datum.test - datum.prediccion)'  
     ).transform_aggregate(
         total2 = 'mean(diff)'
     ).transform_calculate(
@@ -130,14 +130,15 @@ for i in os.listdir('./'):
 
 # Give a name for each dataframe:
 
-xgb_shuff = dataframes[6]
-xgb_sort = dataframes[7]
-sarimax = dataframes[5]
+xgb_shuff = dataframes[5]
+xgb_sort = dataframes[6]
+sarimax = dataframes[4]
 fp_mod = dataframes[0]
-lstm_1_layer = dataframes[4]
 lstm_multilayer = dataframes[3]
 dnn_shuff = dataframes[1]
 dnn_sort = dataframes[2]
+
+
 
 # _________________________
 # Creating a side bar where you can choose the kind of model:
@@ -209,30 +210,19 @@ elif choice == "Neural Network":
         In this chart you can select the dates you want to check the RMSE by clicking and dragging the mouse on the bottom chart""")
         # Plotting the model
         plot_model(dnn_sort, 'DNN with sorted data')
-        
-    # If you check de LSTM with 1 layer:
-    check4 = st.checkbox("Neural Network LSTM 1 layer")
-    
-    if check4:
-        # Header
-        st.markdown("""The following chart is showing us the results for the LSTM Neural Network with only 1 layer. 
-        In this chart you can select the dates you want to check the RMSE by clicking and dragging the mouse on the 
-        bottom chart""")
-        # Plot the model:
-        plot_model(lstm_1_layer, 'LSTM with 1 layer')
-
-        
+               
     # If you check the LSTM multilayer:
     check6 = st.checkbox("Neural Network LSTM multilayer")
     
     if check6:
         # Header
         st.markdown("""The following chart is showing us the results for the LSTM Neural Network with more than 1 layer. 
-        In this chart you can select the dates you want to check the RMSE by clicking and dragging the mouse on the bottom chart""")
+        In this chart you can select the dates you want to check the RMSE by clicking and dragging the mouse on the 
+        bottom chart. Only 7 days are shown on this chart because of limitations.""")
         # Plotting the model
-        plot_model(lstm_multilayer, 'Neural Network LSTM multilayer')
+        plot_model(lstm_multilayer, 'LSTM multilayer')
         
-# When you choose the tab for Neural Networks: 
+# When you choose the tab for Gradient Boosting: 
 elif choice == 'Gradient Boosting':
     # Title
     st.title("Comparison between different regression models for predicting the electricity price")
@@ -249,7 +239,7 @@ elif choice == 'Gradient Boosting':
         st.markdown("""The following chart is showing us the results for the XGBoost with shuffled data. 
         In this chart you can select the dates you want to check the RMSE by clicking and dragging the mouse on the bottom chart""")
         # Plotting the model
-        plot_model(xgb_shuff, "XGBoost shuffled data")
+        plot_model(xgb_shuff, "XGBoost with shuffled data")
         
     # if you check the XGBoost with sorted data
     check8 = st.checkbox("XGBoost with sorted data")
