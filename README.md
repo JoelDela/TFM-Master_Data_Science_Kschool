@@ -2,13 +2,13 @@
 
 Predicting the electricity price may look like an easy task, just as the forecasting of assets. But, in fact, there are a few ways of achieving this goal. The purpose of this project is to check and measure this differents paths to get the prediction of the electricity price. 
 
-In this frontpage we are seeing the main structure of the project, how it is divided and how to go through it. If you are looking for a deeper study of the techniques and methods used, you can check the [document attached](./Comparison_of_ML_models.docx) in this repository where everything has been detailed.
+In this frontpage we are seeing the main structure of the project, how it is divided and how to go through it. If you are looking for a deeper study of the techniques and methods used, you can check the [document attached](https://github.com/JoelDela/TFM-Master_Data_Science_Kschool/blob/master/Comparison_of_ML_models.docx) in this repository where everything has been detailed.
 
 ## Structure of the project and how to run it.
 ### Index
 **0. Preparing the environment.**
 
-**1. [Installing modules](./Modules/).** Here you can check the [notebook](./Modules/Installing_modules.ipynb)
+**1. [Installing modules](https://github.com/JoelDela/TFM-Master_Data_Science_Kschool/tree/master/Modules).** Here you can check the [notebook](./Modules/Installing_modules.ipynb)
 
 **2. [Recollecting data](./Getting_data/).** Here you can check the [notebook](./Getting_data/Getting_Data.ipynb)
 
